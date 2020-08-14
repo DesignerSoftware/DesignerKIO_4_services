@@ -3,6 +3,9 @@ package co.com.designer.kiosko.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -11,6 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "CIUDADES")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ciudades.findAll", query = "SELECT c FROM Ciudades c")})
 public class Ciudades implements Serializable {
@@ -18,12 +22,14 @@ public class Ciudades implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
- 
+    @NotNull
     @Column(name = "SECUENCIA")
     private BigDecimal secuencia;
     @Column(name = "CODIGO")
     private Short codigo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "NOMBRE")
     private String nombre;
     @Column(name = "CODIGOALTERNATIVO")
