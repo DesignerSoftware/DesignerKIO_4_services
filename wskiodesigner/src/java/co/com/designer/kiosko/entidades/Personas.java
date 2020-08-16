@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -16,6 +17,7 @@ import javax.persistence.*;
 
 @NamedQueries({
     @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p")})
+@XmlRootElement
 public class Personas implements Serializable {
 
     private static final long serialVersionUID = 1L;

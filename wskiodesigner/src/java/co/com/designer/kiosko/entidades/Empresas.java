@@ -4,6 +4,7 @@ import java.io.Serializable;
 //import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "EMPRESAS")
 @NamedQueries({
     @NamedQuery(name = "Empresas.findAll", query = "SELECT e FROM Empresas e")})
+@XmlRootElement
 public class Empresas implements Serializable {
 
     private static final long serialVersionUID = 1L;

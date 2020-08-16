@@ -3,6 +3,7 @@ package co.com.designer.kiosko.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -13,6 +14,7 @@ import javax.persistence.*;
 
 @NamedQueries({
     @NamedQuery(name = "ParametrizaClave.findAll", query = "SELECT p FROM ParametrizaClave p")})
+@XmlRootElement
 public class ParametrizaClave implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

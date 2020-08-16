@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 //import javax.persistence.*;
 //import javax.validation.constraints.NotNull;
 
@@ -31,6 +32,7 @@ import javax.persistence.Transient;
 @Table(name = "CONEXIONESKIOSKOS")
 @NamedQueries({
     @NamedQuery(name = "ConexionesKioskos.findAll", query = "SELECT c FROM ConexionesKioskos c")})
+@XmlRootElement
 public class ConexionesKioskos implements Serializable {
 
     private static final long serialVersionUID = 1L;

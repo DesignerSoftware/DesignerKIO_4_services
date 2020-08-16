@@ -2,23 +2,13 @@ package co.com.designer.kiosko.persistencia.implementacion;
 
 import co.com.designer.kiosko.persistencia.interfaz.IPersistenciaConexionInicial;
 import java.math.BigDecimal;
-/*import javax.ejb.Stateless;*/
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-
+@Stateless
 public class PersistenciaConexionInicial implements IPersistenciaConexionInicial {
-
-    @Override
-    public void setearKiosko(EntityManager eManager) throws Exception {
-        System.out.println(this.getClass().getName() + "." + "setearKiosko" + "()");
-        try {
-            setearKiosko(eManager, null);
-        } catch (Exception ex) {
-            throw new Exception(ex);
-        }
-    }
 
     @Override
     public void setearKiosko(EntityManager eManager, String esquema) throws Exception {
@@ -136,32 +126,6 @@ public class PersistenciaConexionInicial implements IPersistenciaConexionInicial
     }
 
     @Override
-    public boolean validarUsuarioRegistrado(EntityManager eManager, String usuario) throws Exception {
-        boolean resultado = false;
-        try {
-            /*String sqlQuery = "SELECT COUNT(*) "
-                    + "FROM CONEXIONESKIOSKOS ck, PERSONAS per "
-                    + "WHERE ck.PERSONA = per.SECUENCIA "
-                    + "AND per.NUMERODOCUMENTO = ? ";*/
-            String sqlQuery = "SELECT COUNT(*) "
-                    + "FROM CONEXIONESKIOSKOS ck, PERSONAS per, KIOAUTORIZADORES ka "
-                    + "WHERE ck.PERSONA = per.SECUENCIA "
-                    + "AND ka.PERSONA = per.SECUENCIA "
-                    + "AND per.NUMERODOCUMENTO = ? ";
-            Query query = eManager.createNativeQuery(sqlQuery);
-            query.setParameter(1, usuario);
-            BigDecimal retorno = (BigDecimal) query.getSingleResult();
-            Integer instancia = retorno.intValueExact();
-            resultado = instancia > 0;
-        } catch (Exception e) {
-            System.out.println("Error PersistenciaConexionInicial.validarUsuarioRegistrado-2: " + e);
-            resultado = false;
-            throw new Exception(e);
-        }
-        return resultado;
-    }
-
-    @Override
     public boolean validarEstadoUsuario(EntityManager eManager, String usuario, String nitEmpresa) throws Exception {
         boolean resultado = false;
         try {
@@ -263,30 +227,6 @@ public class PersistenciaConexionInicial implements IPersistenciaConexionInicial
                 resultado = false;
                 throw new Exception(e);
             }
-        }
-        return resultado;
-    }
-
-    @Override
-    public boolean validarIngresoUsuarioRegistrado(EntityManager eManager, String usuario, String clave) throws Exception {
-        boolean resultado; // = false;
-        try {
-            String sqlQuery = "SELECT COUNT(*) "
-                    + "FROM CONEXIONESKIOSKOS ck, Personas per "
-                    + "WHERE ck.PERSONA = per.SECUENCIA "
-                    + "AND per.numerodocumento = ? "
-                    + "AND ck.activo = 'S' "
-                    + "AND ck.PWD = GENERALES_PKG.ENCRYPT(?) ";
-            Query query = eManager.createNativeQuery(sqlQuery);
-            query.setParameter(1, usuario);
-            query.setParameter(2, clave);
-            BigDecimal retorno = (BigDecimal) query.getSingleResult();
-            Integer instancia = retorno.intValueExact();
-            resultado = instancia > 0;
-        } catch (Exception e) {
-            System.out.println("Error PersistenciaConexionInicial.validarIngresoUsuarioRegistrado: " + e);
-            resultado = false;
-            throw new Exception(e);
         }
         return resultado;
     }

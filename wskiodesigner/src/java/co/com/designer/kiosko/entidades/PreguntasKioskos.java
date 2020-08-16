@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "PREGUNTASKIOSKOS")
 @NamedQueries({
     @NamedQuery(name = "PreguntasKioskos.findAll", query = "SELECT p FROM PreguntasKioskos p")})
+@XmlRootElement
 public class PreguntasKioskos implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

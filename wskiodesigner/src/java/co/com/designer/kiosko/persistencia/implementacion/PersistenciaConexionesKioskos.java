@@ -15,21 +15,20 @@ import javax.persistence.Query;
  *
  * @author Felipe Trivi�o
  */
-
 public class PersistenciaConexionesKioskos implements IPersistenciaConexionesKioskos {
 
     @Override
     public boolean registrarConexion(EntityManager eManager, ConexionesKioskos cnk) {
         boolean resp;
-        System.out.println(this.getClass().getName()+".registrarConexion()");
+        System.out.println(this.getClass().getName() + ".registrarConexion()");
         System.out.println("Se cre� entityManager.");
-        System.out.println("eManager: "+eManager.toString());
-        Map<String,Object> propiedades = eManager.getProperties();
+        System.out.println("eManager: " + eManager.toString());
+        Map<String, Object> propiedades = eManager.getProperties();
         cnk.setUltimaconexion(new Date());
         try {
             eManager.merge(cnk);
             resp = true;
-        } catch (PersistenceException re){
+        } catch (PersistenceException re) {
             System.out.println("PersistenciaConexionesKioskos.registrarConexion");
             System.out.println("Error PersistenceException: " + re);
             resp = false;
@@ -43,12 +42,12 @@ public class PersistenciaConexionesKioskos implements IPersistenciaConexionesKio
 
     @Override
     public ConexionesKioskos consultarConexionEmpleado(EntityManager eManager, String codigoEmpleado, long nitEmpresa) {
-        System.out.println(this.getClass().getName()+".consultarConexionEmpleado()-2");
+        System.out.println(this.getClass().getName() + ".consultarConexionEmpleado()-2");
         System.out.println("eManager: " + eManager);
         System.out.println("codigoEmpleado: " + codigoEmpleado);
         System.out.println("nitEmpresa: " + nitEmpresa);
-        System.out.println("Codigoempleado:: "+codigoEmpleado); //agregado por Tm 20190828
-            System.out.println("nitEmpresa:: "+nitEmpresa); // agregado por Tm 20190828
+        System.out.println("Codigoempleado:: " + codigoEmpleado); //agregado por Tm 20190828
+        System.out.println("nitEmpresa:: " + nitEmpresa); // agregado por Tm 20190828
         try {
             String sqlQuery = "SELECT ck FROM ConexionesKioskos ck WHERE ck.empleado.codigoempleado = :codigoEmpleado and ck.empleado.empresa.nit = :nitEmpresa";
             Query query = eManager.createQuery(sqlQuery);
@@ -64,10 +63,10 @@ public class PersistenciaConexionesKioskos implements IPersistenciaConexionesKio
             return null;
         }
     }
-    
+
     @Override
     public ConexionesKioskos consultarConexionEmpleado(EntityManager eManager, String numerodocumento) {
-        System.out.println(this.getClass().getName()+".consultarConexionEmpleado()");
+        System.out.println(this.getClass().getName() + ".consultarConexionEmpleado()");
         System.out.println("eManager: " + eManager);
         System.out.println("codigoEmpleado: " + numerodocumento);
         try {
@@ -84,10 +83,10 @@ public class PersistenciaConexionesKioskos implements IPersistenciaConexionesKio
             return null;
         }
     }
-    
-     @Override
+
+    @Override
     public ConexionesKioskos consultarConexionPersona(EntityManager eManager, String numeroDocumento, long nitEmpresa) {
-        System.out.println(this.getClass().getName()+".consultarConexionPersona()");
+        System.out.println(this.getClass().getName() + ".consultarConexionPersona()");
         System.out.println("eManager: " + eManager);
         System.out.println("codigoEmpleado: " + numeroDocumento);
         System.out.println("nitEmpresa: " + nitEmpresa);
